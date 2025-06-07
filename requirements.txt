@@ -4,4 +4,3 @@ googletrans==4.0.0rc1
 sentence-splitter==1.4
 sentence-transformers==3.2.1
 underthesea
-pandas==2.2.0
