@@ -390,6 +390,7 @@ def find_top_k_sents(src_vecs, tgt_vecs, k=3):
     """
     embedding_size = src_vecs.shape[1]
     if torch.cuda.is_available(): # GPU version
+        print ("Using GPU for similarity search.")
         res = faiss.StandardGpuResources() 
         index = faiss.IndexFlatIP(embedding_size)
         gpu_index = faiss.index_cpu_to_gpu(res, 0, index)
