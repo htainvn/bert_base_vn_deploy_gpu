@@ -94,12 +94,7 @@ class Bertalign:
             tgt_line = self._get_line(bead[1], self.tgt_sents)
             print(src_line + "\n" + tgt_line + "\n")
 
-    def write_sents(self, path, name):
-        safe_path = path + re.sub(r'[^\w\s-]', '', name).strip().replace(' ', '_')
-        # Check if the safe_path file exists, if yes, skip writing
-        if os.path.exists(safe_path):
-            print(f"File {safe_path} already exists. Skipping writing.")
-            return
+    def write_sents(self, safe_path):
         with open(safe_path, 'w', encoding='utf-8') as f:
             for bead in (self.result):
                 src_line = self._get_line(bead[0], self.src_sents)
