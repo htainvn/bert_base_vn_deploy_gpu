@@ -4,6 +4,9 @@ from bertalign import model
 from bertalign.corelib import *
 from bertalign.utils import *
 
+import re
+import os
+
 class Bertalign:
     def __init__(self,
                  src,
@@ -92,7 +95,13 @@ class Bertalign:
             print(src_line + "\n" + tgt_line + "\n")
 
     def write_sents(self, path, name):
-        with open(path + f"{name}.res", 'w', encoding='utf-8') as f:
+        folder_name = f"{path}{name}.res"
+        safe_path = re.sub(r'[^\w\s-]', '', folder_name).strip().replace(' ', '_')
+        # Check if the safe_path file exists, if yes, skip writing
+        if os.path.exists(safe_path):
+            print(f"File {safe_path} already exists. Skipping writing.")
+            return
+        with open(safe_path, 'w', encoding='utf-8') as f:
             for bead in (self.result):
                 src_line = self._get_line(bead[0], self.src_sents)
                 tgt_line = self._get_line(bead[1], self.tgt_sents)
