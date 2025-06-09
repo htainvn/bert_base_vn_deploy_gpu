@@ -95,8 +95,7 @@ class Bertalign:
             print(src_line + "\n" + tgt_line + "\n")
 
     def write_sents(self, path, name):
-        folder_name = f"{path}{name}.res"
-        safe_path = re.sub(r'[^\w\s-]', '', folder_name).strip().replace(' ', '_')
+        safe_path = path + re.sub(r'[^\w\s-]', '', name).strip().replace(' ', '_')
         # Check if the safe_path file exists, if yes, skip writing
         if os.path.exists(safe_path):
             print(f"File {safe_path} already exists. Skipping writing.")
